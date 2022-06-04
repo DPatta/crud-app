@@ -3,7 +3,7 @@ let router = express.Router();
 let dbCon = require('../lib/db');
 
 router.get('/', (req, res, next ) => {
-    dbCon.query('SELECT * FROM books ORDER BY id desc', (err, rows)=> {
+    dbCon.query('SELECT * FROM books ORDER BY id ', (err, rows)=> {
         if (err) {
             req.flash('error', err);
             res.render('books', {data:''});
