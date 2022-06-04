@@ -1,0 +1,37 @@
+extends ../layout
+
+block content
+  if messages.error
+      div(role="alert").alert.alert-danger #{messages.error}
+  if messages.success
+      div(role="alert").alert.alert-success #{messages.success}
+
+
+  div.card
+    div.card-header
+      ul.nav.nav-pills.w-100
+        li.class Books
+        li.nav-link.ml-auto
+          a(class='nav-link active' href='/books/add') Add Books
+      
+
+      div.card-body
+        if data.length
+          table.table
+            thead
+              tr
+                th(scope="col") #
+                th(scope="col") Name
+                th(scope="col") Author
+                th(width="200px") Action
+            tbody
+              - for (let i = 0; i < data.length; i++ )
+                  tr 
+                    th(scope="rows") #{i+1} 
+                    td #{data[i].name}
+                    td #{data[i].author}
+                    td 
+                      a(href="../books/edit/#{data[i].id}" class="btn btn-success edit") Edit 
+                      a(href="../books/delete/#{data[i].id}" onclick="return alert('Are you Sure?')" class="btn btn-danger delete") Delete
+        if !data.length
+          p.text-center No book found!
